@@ -10,6 +10,7 @@ var productRouter = require('./routes/product');
 var blogRouter = require('./routes/blog');
 
 var app = express();
+var session = require('express-session')
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -21,9 +22,15 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use(require(connect-flash)());
+app.use(session({
+  secret: 'keyboard cat',
+  resave: false,
+  saveUninitialized: true
+}))
+
+app.use(require('connect-flash')());
 app.use(function (req, res, next) {
-  res.locals.message = require('express-messages')(req, res);
+  res.locals.messages = require('express-messages')(req, res);
   next();
 });
 

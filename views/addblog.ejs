@@ -9,14 +9,15 @@
         <%- include layout %>
         <div class="container">
             <h2 align="center">เขียนบทความ</h2>
+            <%- messages() %>
             <% if(locals.errors){ %>
             <ul class="alert alert-danger">
-                <% Object.value (errors).forEach(function(error){ %>
+                <% Object.values(errors).forEach(function(error){ %>
                     <li> <%= error.msg %> </li>
                 <% }) %>
             </ul>
-            <% }) %>
-            <form class="" action="blog/add" method="post">
+            <% } %>
+            <form class="" action="/blog/add" method="post">
                 <div class="form-group">
                     <label for="">ชื่อบทความ</label>
                     <input type="text" name="name" value="" class="form-control">
